@@ -44,6 +44,12 @@ async function run() {
                   res.send(parts);
             });
 
+            app.get('/parts/:id', async (req, res) => {
+                  const id = req.params.id;
+                  const query = { _id: ObjectId(id) };
+                  const parts = await partCollection.findOne(query);
+                  res.send(parts);
+            });
 
             app.get('/order', async (req, res) => {
                   const parts = await partCollection.find().toArray();
