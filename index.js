@@ -54,6 +54,12 @@ async function run() {
             app.get('/order', async (req, res) => {
                   const parts = await partCollection.find().toArray();
 
+                  // const orders = await ordersCollection.find().toArray();
+                  // parts.forEach(parts => {
+                  //       const partOrders = orders.filter(orders => orders.name === parts.name);
+                  // })
+                  // return res.send(orders);
+
                   const decodedEmail = req.dedcoded.email;
                   if (email === decodedEmail) {
 
