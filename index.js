@@ -54,19 +54,25 @@ async function run() {
             app.get('/order', async (req, res) => {
                   const parts = await partCollection.find().toArray();
 
-                  const decodedEmail = req.dedcoded.email;
-                  if (email === decodedEmail) {
+                  const orders = await ordersCollection.find().toArray();
+                  parts.forEach(parts => {
+                        const partOrders = orders.filter(orders => orders.name === parts.name);
+                  })
+                  return res.send(orders);
 
-                        const orders = await ordersCollection.find().toArray();
-                        parts.forEach(parts => {
-                              const partOrders = orders.filter(orders => orders.name === parts.name);
-                        })
-                        return res.send(orders);
+                  // const decodedEmail = req.dedcoded.email;
+                  // if (email === decodedEmail) {
 
-                  }
-                  else {
-                        return res.status(403).send({ message: 'access forbiten' })
-                  }
+                  //       const orders = await ordersCollection.find().toArray();
+                  //       parts.forEach(parts => {
+                  //             const partOrders = orders.filter(orders => orders.name === parts.name);
+                  //       })
+                  //       return res.send(orders);
+
+                  // }
+                  // else {
+                  //       return res.status(403).send({ message: 'access forbiten' })
+                  // }
 
 
             });
